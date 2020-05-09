@@ -9,7 +9,7 @@ The idea is to outsource the authentication to a webbrowser and get the cookie a
 ## Installation
 You can install it by executing the following on the command line.
 ```shell script
-pip3 install -U https://github.com/hupebln/openconnect-selenium --user
+pip3 install -U git+https://github.com/hupebln/openconnect-selenium --user
 ```
 
 ## Command-Line options
