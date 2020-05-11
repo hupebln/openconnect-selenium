@@ -160,7 +160,7 @@ def main():
     signals = (signal.SIGHUP, signal.SIGTERM, signal.SIGINT)
     for s in signals:
         loop.add_signal_handler(
-            s, lambda: asyncio.create_task(stop_vpn(s, loop))
+            s, lambda: loop.create_task(stop_vpn(s, loop))
         )
 
     try:
