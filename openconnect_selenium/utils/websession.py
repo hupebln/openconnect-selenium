@@ -45,7 +45,7 @@ class Session:
             while not [i for i in self.driver.get_cookies() if i.get('name', '') == self.cookie_name]:
                 logger.info('waiting for cookie')
                 sleep(2)
-        except WebDriverException:
+        except (WebDriverException, TypeError):
             logger.error('couldn\'t find cookie - Browser closed?')
             self.driver.quit()
             sys.exit(94)
@@ -88,6 +88,7 @@ class ChromeSession(Session):
         logger.debug('user-data-dir: {}'.format(self.data_dir))
         out = webdriver.ChromeOptions()
         out.add_argument('user-data-dir={}-chrome'.format(self.data_dir))
+        out.add_experimental_option('excludeSwitches', ['enable-automation'])
 
         return out
 
