@@ -85,9 +85,10 @@ class ChromeSession(Session):
 
     @property
     def options(self):
-        logger.debug('user-data-dir: {}'.format(self.data_dir))
+        udd_str = 'user-data-dir={}-chrome'.format(self.data_dir)
+        logger.debug(udd_str)
         out = webdriver.ChromeOptions()
-        out.add_argument('user-data-dir={}-chrome'.format(self.data_dir))
+        out.add_argument(udd_str)
         out.add_experimental_option('excludeSwitches', ['enable-automation'])
 
         return out

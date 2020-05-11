@@ -11,7 +11,7 @@ async def run_openconnect(host, cookie):
         '--protocol=nc',
         '--cookie={}'.format(cookie)
     ]
-    logger.debug('executing "{}"'.format(' '.join(cmd)))
+    logger.debug('executing "{} {}"'.format(' '.join(cmd), host))
     proc = await asyncio.create_subprocess_exec(
         *cmd,
         host,
