@@ -157,7 +157,10 @@ def main():
     loop = asyncio.get_event_loop()
 
     cookie = '='.join(driver.loop_wait_cookie())
-    loop.create_task(driver.wait_cookie_sync(20))
+
+    # workaround to fix too fast closing of the browser
+    # it sometimes led to incomplete cookies
+    loop.create_task(driver.wait_cookie_sync(5))
 
     signals = (signal.SIGHUP, signal.SIGTERM, signal.SIGINT)
     for s in signals:
