@@ -154,9 +154,11 @@ def main():
         cookie_name=args.cookie
     )
 
-    cookie = '='.join(driver.loop_wait_cookie())
-
     loop = asyncio.get_event_loop()
+
+    cookie = '='.join(driver.loop_wait_cookie())
+    loop.create_task(driver.wait_cookie_sync(20))
+
     signals = (signal.SIGHUP, signal.SIGTERM, signal.SIGINT)
     for s in signals:
         loop.add_signal_handler(

@@ -3,6 +3,7 @@ import sys
 import logging
 
 from time import sleep
+from asyncio import sleep as a_sleep
 
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
@@ -57,8 +58,12 @@ class Session:
             logger.debug('Cookie found: {}'.format(cookie))
             break
 
-        self.driver.quit()
         return cookie
+
+    async def wait_cookie_sync(self, time2wait=10):
+        self.driver.minimize_window()
+        await a_sleep(time2wait)
+        self.driver.quit()
 
 
 class ChromeSession(Session):
