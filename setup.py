@@ -9,7 +9,7 @@ with open('requirements.txt', 'r') as f:
 
 setup(
     name='openconnect-selenium',
-    version='0.0.5',
+    version='0.0.6',
     packages=find_packages(),
     url='https://github.com/hupe/openconnect-selenium',
     license='MIT',

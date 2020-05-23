@@ -4,13 +4,22 @@ import logging
 logger = logging.getLogger('oc.openconnect')
 
 
-async def run_openconnect(host, cookie):
+async def run_openconnect(host, cookie, verbose):
     cmd = [
         'sudo',
-        'openconnect',
-        '--protocol=nc',
-        '--cookie={}'.format(cookie)
+        'openconnect'
     ]
+
+    if verbose:
+        cmd.append('-{}'.format('v' * verbose))
+
+    cmd.extend(
+        [
+            '--protocol=nc',
+            '--cookie={}'.format(cookie)
+        ]
+    )
+
     logger.debug('executing "{} {}"'.format(' '.join(cmd), host))
     proc = await asyncio.create_subprocess_exec(
         *cmd,

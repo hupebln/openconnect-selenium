@@ -169,7 +169,7 @@ def main():
         )
 
     try:
-        loop.create_task(run_openconnect(url, cookie))
+        loop.create_task(run_openconnect(url, cookie, args.verbose))
         loop.run_forever()
     finally:
         loop.close()
