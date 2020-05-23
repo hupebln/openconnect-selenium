@@ -41,6 +41,8 @@ class Session:
         cookie = (None, None)
 
         self.driver.get(self.url)
+        sleep(1)
+        self.driver.refresh()
         sleep(2)
         try:
             while not [i for i in self.driver.get_cookies() if i.get('name', '') == self.cookie_name]:
