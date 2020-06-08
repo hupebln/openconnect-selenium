@@ -14,7 +14,7 @@ from openconnect_selenium.utils.openconnect import stop_vpn
 __author__ = "Christian Schirge"
 __copyright__ = "Copyright 2020, Christian Schirge"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.7"
 __maintainer__ = "Christian Schirge"
 __status__ = "Testing"
 
@@ -131,11 +131,11 @@ def _parse_args():
         help='-v loglevel INFO, -vv loglevel DEBUG'
     )
 
-    return parser.parse_args()
+    return parser.parse_known_args()
 
 
 def main():
-    args = _parse_args()
+    args, unknown_args = _parse_args()
     log_map = {
         0: 'WARNING',
         1: 'INFO',
@@ -169,7 +169,7 @@ def main():
         )
 
     try:
-        loop.create_task(run_openconnect(url, cookie, args.verbose))
+        loop.create_task(run_openconnect(url, cookie, args.verbose, unknown_args))
         loop.run_forever()
     finally:
         loop.close()
