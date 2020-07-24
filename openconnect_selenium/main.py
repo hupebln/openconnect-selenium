@@ -14,7 +14,7 @@ from openconnect_selenium.utils.openconnect import stop_vpn
 __author__ = "Christian Schirge"
 __copyright__ = "Copyright 2020, Christian Schirge"
 __license__ = "MIT"
-__version__ = "0.0.7"
+__version__ = "0.0.8"
 __maintainer__ = "Christian Schirge"
 __status__ = "Testing"
 
@@ -114,6 +114,14 @@ def _parse_args():
         'url',
         type=_http_url_type,
         help='The URL-Endpoint which serves the landing page.'
+    )
+
+    parser.add_argument(
+        '-b',
+        '--binary',
+        type=str,
+        default='',
+        help='nome of the binary - eg "google-chrome-stable"'
     )
 
     parser.add_argument(

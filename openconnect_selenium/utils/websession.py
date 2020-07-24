@@ -73,7 +73,8 @@ class ChromeSession(Session):
             self,
             url,
             user_data_dir=None,
-            cookie_name=None
+            cookie_name=None,
+            custom_chrome_name=None
     ):
         super().__init__(
             url=url,
@@ -81,11 +82,12 @@ class ChromeSession(Session):
             cookie_name=cookie_name
         )
 
+        self.custom_chrome_name = custom_chrome_name
         self.driver_chrome = None
 
     def _get_check_chromedriver(self):
         chromedriver = search_driver_in_path()
-        chromedriver = chromedriver if chromedriver else get_chromedriver()
+        chromedriver = chromedriver if chromedriver else get_chromedriver(custom_name=self.custom_chrome_name)
         logger.debug('Chromedriver is in path: {}'.format(chromedriver))
 
         return chromedriver

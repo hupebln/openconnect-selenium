@@ -7,6 +7,8 @@ from urllib.request import urlopen
 from urllib.error import HTTPError
 from stat import S_IXUSR
 from io import BytesIO
+from subprocess import check_output
+from shutil import which
 
 ZIP_UNIX_SYSTEM = 3
 logger = logging.getLogger('oc.chromedriver')
@@ -32,9 +34,32 @@ def search_driver_in_path():
     return None
 
 
-def get_chromedriver():
+def try_get_chrome_version(custom_name=None):
+    chrome_names = [
+        'google-chrome',
+        'google-chrome-stable',
+        'google-chrome-testing',
+        'chrome',
+        'chromium',
+        'chromium-stable',
+        'chromium-testing'
+    ]
+
+    if custom_name:
+        chrome_names.insert(0, custom_name)
+
+    for chrome_name in chrome_names:
+        path = which(chrome_name)
+        if path:
+            version = check_output([path, '--version']).decode().replace(' \n', '').rsplit(' ', 1)[1].rsplit('.', 1)[0]
+            return f'https://chromedriver.storage.googleapis.com/LATEST_RELEASE_{version}'
+
+    return 'http://chromedriver.storage.googleapis.com/LATEST_RELEASE'
+
+
+def get_chromedriver(custom_name=None):
     chromedriver_path = '/tmp/chromedriver/chromedriver'
-    latest_url = 'http://chromedriver.storage.googleapis.com/LATEST_RELEASE'
+    latest_url = try_get_chrome_version(custom_name=custom_name)
     download_url = 'http://chromedriver.storage.googleapis.com/{}/chromedriver_linux64.zip'
 
     try:
