@@ -159,7 +159,8 @@ def main():
 
     driver = ChromeSession(
         url=url,
-        cookie_name=args.cookie
+        cookie_name=args.cookie,
+        custom_chrome_name=args.binary
     )
 
     loop = asyncio.get_event_loop()
