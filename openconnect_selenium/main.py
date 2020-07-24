@@ -121,7 +121,7 @@ def _parse_args():
         '--binary',
         type=str,
         default='',
-        help='nome of the binary - eg "google-chrome-stable"'
+        help='name of the binary - eg "google-chrome-stable"'
     )
 
     parser.add_argument(
