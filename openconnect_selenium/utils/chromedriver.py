@@ -46,12 +46,18 @@ def try_get_chrome_version(custom_name=None):
     ]
 
     if custom_name:
-        chrome_names.insert(0, custom_name)
+        chrome_names.append(custom_name)
+
+    logger.debug(f'searching for the following binaries: {chrome_names}')
 
     for chrome_name in chrome_names:
         path = which(chrome_name)
         if path:
-            version = check_output([path, '--version']).decode().replace(' \n', '').rsplit(' ', 1)[1].rsplit('.', 1)[0]
+            logger.debug(f'found binary at {path}')
+            version = check_output([path, '--version'])
+            if not version:
+                continue
+            version = version.decode().replace(' \n', '').rsplit(' ', 1)[1].rsplit('.', 1)[0]
             return f'https://chromedriver.storage.googleapis.com/LATEST_RELEASE_{version}'
 
     return 'http://chromedriver.storage.googleapis.com/LATEST_RELEASE'
