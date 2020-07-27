@@ -14,7 +14,7 @@ from openconnect_selenium.utils.openconnect import stop_vpn
 __author__ = "Christian Schirge"
 __copyright__ = "Copyright 2020, Christian Schirge"
 __license__ = "MIT"
-__version__ = "0.0.8"
+__version__ = "0.0.9"
 __maintainer__ = "Christian Schirge"
 __status__ = "Testing"
 
