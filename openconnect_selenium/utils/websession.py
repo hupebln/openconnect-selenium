@@ -63,7 +63,10 @@ class Session:
         return cookie
 
     async def wait_cookie_sync(self, time2wait=10):
-        self.driver.minimize_window()
+        try:
+            self.driver.minimize_window()
+        except WebDriverException as e:
+            logger.warning(e)
         await a_sleep(time2wait)
         self.driver.quit()
 
